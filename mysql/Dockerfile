@@ -9,9 +9,8 @@ ENV INSTALL_DB_SHELL install_db.sh
 
 ENV INSTALL_DB_SQL_O1 sakila-schema.sql
 ENV INSTALL_DB_SQL_O2 sakila-data.sql
-ENV SERVER server.sh
-#创建文件夹
-RUN mkdir -p $WORK_PATH
+# ENV SERVER server.sh
+
 #容器；内部卷绑定
 VOLUME /var/lib/mysql
 
@@ -19,12 +18,13 @@ VOLUME /var/lib/mysql
 COPY ./$INSTALL_DB_SHELL $AUTO_RUN_DIR/
 COPY ./$INSTALL_DB_SQL_O1 $WORK_PATH/
 COPY ./$INSTALL_DB_SQL_O2 $WORK_PATH/
-COPY ./$SERVER $WORK_PATH/
+# COPY ./$SERVER $WORK_PATH/
 
-RUN chmod a+x $AUTO_RUN_DIR/$INSTALL_DB_SHELL &&  chmod a+x $WORK_PATH/$INSTALL_DB_SQL_O1 && \
- chmod a+x $WORK_PATH/$INSTALL_DB_SQL_O2
+RUN chmod a+x $AUTO_RUN_DIR/$INSTALL_DB_SHELL 
+# &&  chmod a+x $WORK_PATH/$INSTALL_DB_SQL_O1 && \
+#  chmod a+x $WORK_PATH/$INSTALL_DB_SQL_O2
 
-CMD [ "sh", "-c", "/usr/local/work/server.sh" ]
+# CMD [ "sh", "-c", "/usr/local/work/server.sh" ]
 
 
 
